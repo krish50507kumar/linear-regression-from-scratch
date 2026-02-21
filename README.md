@@ -22,138 +22,41 @@ All computations are fully vectorized using NumPy.
 
 Objective
 
-Minimize the Mean Squared Error:
+We minimize the Mean Squared Error:
 
-𝐽
-(
-𝑊
-)
-=
-1
-𝑚
-∑
-𝑖
-=
-1
-𝑚
-(
-𝑦
-𝑖
-−
-𝑦
-^
-𝑖
-)
-2
-J(W)=
-m
-1
-	​
-
-i=1
-∑
-m
-	​
-
-(y
-i
-	​
-
-−
-y
-^
-	​
-
-i
-	​
-
-)
-2
+J(W) = (1/m) * Σ (y - ŷ)²
 
 Where:
 
-𝑦
-^
-=
-𝑋
-𝑊
-y
-^
-	​
+ŷ = XW
 
-=XW
+The goal is to learn optimal weights W using gradient descent.
 
-The goal is to learn optimal weights 
-𝑊
-W using gradient descent.
-
-Gradient Derivation
+Gradient
 
 The analytical gradient of MSE with respect to weights:
 
-∂
-𝐽
-∂
-𝑊
-=
-2
-𝑚
-𝑋
-𝑇
-(
-𝑋
-𝑊
-−
-𝑌
-)
-∂W
-∂J
-	​
-
-=
-m
-2
-	​
-
-X
-T
-(XW−Y)
+dJ/dW = (2/m) * Xᵀ (XW - Y)
 
 Update rule:
 
-𝑊
-:
-=
-𝑊
-−
-𝛼
-∂
-𝐽
-∂
-𝑊
-W:=W−α
-∂W
-∂J
-	​
-
+W := W - α * dJ/dW
 
 Where:
 
-𝛼
 α = learning rate
 
-𝑚
 m = number of samples
 
 Implementation Highlights
 
-Fully vectorized (no explicit loops over samples)
+Fully vectorized (no loops over training samples)
 
-Bias term handled explicitly
+Explicit bias term
 
-Feature standardization (excluding bias column)
+Feature scaling (excluding bias column)
 
-Log-scale cost plot to analyze convergence behavior
+Log-scale cost visualization
 
 Manual weight initialization
 
@@ -161,35 +64,15 @@ Feature Scaling
 
 All features (except bias term) are standardized:
 
-𝑋
-𝑠
-𝑐
-𝑎
-𝑙
-𝑒
-𝑑
-=
-𝑋
-−
-𝜇
-𝜎
-X
-scaled
-	​
+X_scaled = (X - mean) / std
 
-=
-σ
-X−μ
-	​
-
-
-This improves convergence stability and prevents gradient explosion/divergence.
+This improves convergence speed and numerical stability.
 
 Convergence Behavior
 
-The cost is plotted on a logarithmic scale to visualize exponential decay during early training phases.
+The cost curve is plotted using a logarithmic scale to reveal exponential decay in early training stages.
 
-Initial rapid decrease occurs due to large gradient magnitude when weights are far from the optimum.
+The rapid initial decrease occurs because gradients are large when weights are far from the optimum.
 
 Tech Stack
 
@@ -201,19 +84,19 @@ Matplotlib
 
 Why This Project?
 
-This implementation was built to:
+This project was built to:
 
-Understand optimization mechanics at a mathematical level
+Understand gradient-based optimization at a mathematical level
 
-Develop intuition for gradient-based learning
+Develop intuition for convergence dynamics
 
 Avoid black-box ML abstractions
 
-Strengthen linear algebra + numerical computation skills
+Strengthen linear algebra foundations
 
 Possible Extensions
 
-Early stopping criteria
+Early stopping
 
 Learning rate scheduling
 
@@ -221,9 +104,9 @@ Mini-batch gradient descent
 
 Normal equation comparison
 
-Regularization (L2 / Ridge)
+L2 regularization (Ridge)
 
 Author
 
 Krish
-Aspiring ML engineer focused on first-principles understanding of machine learning systems.
+Focused on first-principles machine learning and systems-level thinking.
