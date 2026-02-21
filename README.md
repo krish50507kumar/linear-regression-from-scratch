@@ -1,112 +1,95 @@
-# linear-regression-from-scratch
-Multivariate linear regression implemented from scratch using vectorized gradient descent in NumPy. Includes manual cost computation, gradient derivation, feature scaling, and convergence analysis.
+# 📈 Linear Regression from Scratch (NumPy Implementation)
 
+**Multivariate linear regression implemented entirely from scratch using vectorized gradient descent in NumPy. Includes manual cost computation, gradient derivation, feature scaling, and convergence analysis.**
 
-📈 Linear Regression from Scratch (NumPy Implementation)
-Overview
+## 📖 Overview
 
-This repository contains a from-scratch implementation of multivariate linear regression using:
+This repository contains a from-scratch implementation of multivariate linear regression. No high-level machine learning libraries (like scikit-learn) were used. All computations are fully vectorized using NumPy to ensure optimal performance and to demonstrate the underlying linear algebra of the algorithm.
 
-Batch Gradient Descent
+**Key Features:**
+* Batch Gradient Descent
+* Mean Squared Error (MSE) loss
+* Analytical gradient derivation
+* Feature standardization
+* Log-scale convergence visualization
 
-Mean Squared Error (MSE) loss
+---
 
-Analytical gradient derivation
+## 🧮 Mathematical Formulation
 
-Feature standardization
+### Objective
+We minimize the Mean Squared Error (MSE) cost function:
 
-Log-scale convergence visualization
+$$J(W) = \frac{1}{m} \sum_{i=1}^{m} (y^{(i)} - \hat{y}^{(i)})^2$$
 
-No ML libraries (e.g., scikit-learn) were used.
-All computations are fully vectorized using NumPy.
+Where the predicted values are computed as:
 
-Objective
+$$\hat{y} = XW$$
 
-We minimize the Mean Squared Error:
+The goal is to learn the optimal weight vector $W$ using gradient descent.
 
-J(W) = (1/m) * Σ (y - ŷ)²
+### Gradient & Update Rule
+The analytical gradient of the MSE with respect to the weights is derived as:
 
-Where:
+$$\frac{\partial J}{\partial W} = \frac{2}{m} X^T (XW - Y)$$
 
-ŷ = XW
+The weights are iteratively updated using the following rule:
 
-The goal is to learn optimal weights W using gradient descent.
-
-Gradient
-
-The analytical gradient of MSE with respect to weights:
-
-dJ/dW = (2/m) * Xᵀ (XW - Y)
-
-Update rule:
-
-W := W - α * dJ/dW
+$$W := W - \alpha \frac{\partial J}{\partial W}$$
 
 Where:
+* $\alpha$ = learning rate
+* $m$ = number of training samples
 
-α = learning rate
+### Feature Scaling
+To improve convergence speed and ensure numerical stability, all features (excluding the bias term) are standardized:
 
-m = number of samples
+$$X_{scaled} = \frac{X - \mu}{\sigma}$$
 
-Implementation Highlights
+---
 
-Fully vectorized (no loops over training samples)
+## ⚙️ Implementation Highlights
 
-Explicit bias term
+* **Fully Vectorized:** No `for` loops are used over the training samples, ensuring efficient matrix operations.
+* **Explicit Bias Term:** The bias is manually appended as a column of ones to the feature matrix.
+* **Feature Scaling:** Standardization is applied to prevent features with larger magnitudes from dominating the gradient.
+* **Log-Scale Cost Visualization:** The cost curve is plotted using a logarithmic scale to clearly reveal the exponential decay in early training stages.
+* **Manual Weight Initialization:** Weights are explicitly initialized before training begins.
 
-Feature scaling (excluding bias column)
+## 📉 Convergence Behavior
 
-Log-scale cost visualization
+* The rapid initial decrease in cost occurs because gradients are exceptionally large when the initialized weights are far from the global optimum.
+* Visualizing the cost on a logarithmic scale provides a clearer picture of the model's convergence dynamics over time.
 
-Manual weight initialization
+---
 
-Feature Scaling
+## 🛠️ Tech Stack
 
-All features (except bias term) are standardized:
+* **Python 3**
+* **NumPy** (for all matrix and vector operations)
+* **Matplotlib** (for convergence and data visualization)
 
-X_scaled = (X - mean) / std
+---
 
-This improves convergence speed and numerical stability.
+## 🧠 Why This Project?
 
-Convergence Behavior
+This project was built to step away from black-box ML abstractions and build a deep, foundational understanding of how these algorithms actually work. The primary goals were to:
+* Understand gradient-based optimization at a strict mathematical level.
+* Develop a strong intuition for convergence dynamics and hyperparameter tuning.
+* Strengthen foundational linear algebra concepts by applying them in code.
 
-The cost curve is plotted using a logarithmic scale to reveal exponential decay in early training stages.
+---
 
-The rapid initial decrease occurs because gradients are large when weights are far from the optimum.
+## 🚀 Possible Extensions
 
-Tech Stack
+- [ ] Early stopping implementation
+- [ ] Learning rate scheduling / decay
+- [ ] Mini-batch gradient descent
+- [ ] Normal equation implementation for direct comparison
+- [ ] L2 regularization (Ridge Regression)
 
-Python 3
+---
 
-NumPy
+## 👨‍💻 Author
 
-Matplotlib
-
-Why This Project?
-
-This project was built to:
-
-Understand gradient-based optimization at a mathematical level
-
-Develop intuition for convergence dynamics
-
-Avoid black-box ML abstractions
-
-Strengthen linear algebra foundations
-
-Possible Extensions
-
-Early stopping
-
-Learning rate scheduling
-
-Mini-batch gradient descent
-
-Normal equation comparison
-
-L2 regularization (Ridge)
-
-Author
-
-Krish
-Focused on first-principles machine learning and systems-level thinking.
+**Krish** *Focused on first-principles machine learning, deep learning, and systems-level thinking.*
